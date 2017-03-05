@@ -4,7 +4,7 @@ from PyQt4.QtGui import QColor
 
 
 class SetPreferences(QtGui.QDialog):
-    def __init__(self, dog, parent=None):
+    def __init__(self, game, parent=None):
         QtGui.QDialog.__init__(self, parent)
         self.resize(300,300)
         self.setWindowTitle('Preferences')
@@ -14,11 +14,11 @@ class SetPreferences(QtGui.QDialog):
         self.diff_radio_box = QtGui.QHBoxLayout()
         self.diff_label = QtGui.QLabel("Difficult level:  ")
         self.radiobutton1 = QtGui.QRadioButton("Easy")
-        self.radiobutton1.toggled.connect(lambda: set_level(self.radiobutton1))
+        self.radiobutton1.toggled.connect(lambda: set_level(self.radiobutton1,game))
         self.radiobutton2 = QtGui.QRadioButton("Normal")
-        self.radiobutton2.toggled.connect(lambda: set_level(self.radiobutton2))
+        self.radiobutton2.toggled.connect(lambda: set_level(self.radiobutton2,game))
         self.radiobutton3 = QtGui.QRadioButton("Hard")
-        self.radiobutton3.toggled.connect(lambda: set_level(self.radiobutton3))
+        self.radiobutton3.toggled.connect(lambda: set_level(self.radiobutton3,game))
 # set buttons isChecked or not
         import mainwindow
         diff = mainwindow.DIFFICULT
@@ -36,7 +36,7 @@ class SetPreferences(QtGui.QDialog):
         self.theme_label = QtGui.QLabel("Theme:  ")
         self.theme_combo_box = QtGui.QComboBox()
         self.theme_combo_box.addItems(["GrassLand", "Dark", "ColorBlind"])
-        self.theme_combo_box.currentIndexChanged.connect(lambda: set_theme(self.theme_combo_box, dog))
+        self.theme_combo_box.currentIndexChanged.connect(lambda: set_theme(self.theme_combo_box, game))
         self.theme_hbox.addWidget(self.theme_label)
         self.theme_hbox.addWidget(self.theme_combo_box)
         self.mainvbox.addLayout(self.theme_hbox)
@@ -48,25 +48,34 @@ class SetPreferences(QtGui.QDialog):
         self.setLayout(self.mainvbox)
 
 
-def set_theme(combo,dog):
+def set_theme(combo, game):
     'set color theme'
     if combo.currentText() == "GrassLand":
-        dog.setcolor(QColor(192,253,123),QColor(255,255,0),QColor(255,0,0))
+        game.setcolor(QColor(192, 253, 123), QColor(255, 255, 0), QColor(255, 0, 0))
     elif combo.currentText() == "Dark":
-        dog.setcolor(QColor(0,0,0),QColor(255,255,255),QColor(127,127,127))
+        game.setcolor(QColor(0, 0, 0), QColor(255, 255, 255), QColor(127, 127, 127))
     elif combo.currentText() == "ColorBlind":
-        dog.setcolor(QColor(104,151,187),QColor(165,194,97),QColor(204,120,50))
+        game.setcolor(QColor(104, 151, 187), QColor(165, 194, 97), QColor(204, 120, 50))
 
 
-def set_level(button):
+def set_level(button, game):
     'set difficult level'
     import mainwindow
+    flag = False
     if button.text() == "Easy":
         if button.isChecked():
-            mainwindow.DIFFICULT = 1
+            if mainwindow.DIFFICULT != 1:
+                mainwindow.DIFFICULT = 1
+                flag = True
     if button.text() == "Normal":
         if button.isChecked():
-            mainwindow.DIFFICULT = 2
+            if mainwindow.DIFFICULT != 2:
+                mainwindow.DIFFICULT = 2
+                flag = True
     if button.text() == "Hard":
         if button.isChecked():
-            mainwindow.DIFFICULT = 3
+            if mainwindow.DIFFICULT != 3:
+                mainwindow.DIFFICULT = 3
+                flag = True
+    if flag:
+        game.beginGame()

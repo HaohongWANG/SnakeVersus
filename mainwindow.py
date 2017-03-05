@@ -83,8 +83,8 @@ class MainWindow(QtGui.QWidget):
         self.ai_pre = [399]
         self.lables[0].setPalette(self.pe2)
         self.lables[399].setPalette(self.pe3)
-        self.lables[0].setText('H')
-        self.lables[399].setText('H')
+        self.lables[0].setText('P')
+        self.lables[399].setText('E')
         self.gc.reset()
 
     def showHelp(self):
@@ -135,7 +135,7 @@ class MainWindow(QtGui.QWidget):
             if i not in self.user_pre:
                 self.lables[i].setPalette(self.pe2)
         self.lables[self.user_pre[-1]].setText('')
-        self.lables[self.gc.usersnake.hold[-1]].setText('H')
+        self.lables[self.gc.usersnake.hold[-1]].setText('P')
         self.user_pre = self.gc.usersnake.hold[:]
         if not self.gc.isAIOver():  # 若该条件成立，则输出用户赢
             self.begin = False
@@ -152,7 +152,7 @@ class MainWindow(QtGui.QWidget):
             if i not in self.ai_pre:
                 self.lables[i].setPalette(self.pe3)
         self.lables[self.ai_pre[-1]].setText('')
-        self.lables[self.gc.aisnake.hold[-1]].setText('H')
+        self.lables[self.gc.aisnake.hold[-1]].setText('E')
         self.ai_pre = self.gc.aisnake.hold[:]
 
         if not self.gc.isUserOver():  # 若该条件成立，则输出用户输
