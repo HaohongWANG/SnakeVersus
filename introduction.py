@@ -15,7 +15,8 @@ class HelpWindow(QtGui.QDialog):
         self.intro_text= u'这是一款人机对战游戏\n玩家(P)使用W/A/S/D键\n' \
                          u'控制一条逐渐增长的巨龙，\n与敌人(E)决一死战，' \
                          u'\n在将对手逼上梁山的同时\n要避免自己无路可走。' \
-                         u'\n按R键重新开局。\n祝游戏愉快～'
+                         u'\n按R键重新开局。\n祝游戏愉快～\n\n\n\n\n' \
+                         u'Designed by Xuetao Chen & Haohong Wang'
 
         vbox = QtGui.QVBoxLayout()
         vbox.addStretch(1)
