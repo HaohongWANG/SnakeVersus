@@ -35,7 +35,7 @@ class SetPreferences(QtGui.QDialog):
         self.theme_hbox = QtGui.QHBoxLayout()
         self.theme_label = QtGui.QLabel("Theme:  ")
         self.theme_combo_box = QtGui.QComboBox()
-        self.theme_combo_box.addItems(["GrassLand", "Dark", "ColorBlind"])
+        self.theme_combo_box.addItems(["GrassLand", "Dark", "Ocean"])
         self.theme_combo_box.currentIndexChanged.connect(lambda: set_theme(self.theme_combo_box, game))
         self.theme_hbox.addWidget(self.theme_label)
         self.theme_hbox.addWidget(self.theme_combo_box)
@@ -54,7 +54,7 @@ def set_theme(combo, game):
         game.setcolor(QColor(192, 253, 123), QColor(255, 255, 0), QColor(255, 0, 0))
     elif combo.currentText() == "Dark":
         game.setcolor(QColor(0, 0, 0), QColor(255, 255, 255), QColor(127, 127, 127))
-    elif combo.currentText() == "ColorBlind":
+    elif combo.currentText() == "Ocean":
         game.setcolor(QColor(104, 151, 187), QColor(165, 194, 97), QColor(204, 120, 50))
 
 
